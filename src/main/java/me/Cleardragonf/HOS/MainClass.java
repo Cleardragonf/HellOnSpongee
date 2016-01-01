@@ -17,12 +17,14 @@ import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.config.DefaultConfig;
 import org.spongepowered.api.data.Transaction;
 import org.spongepowered.api.entity.Entity;
+import org.spongepowered.api.entity.EntitySnapshot;
 import org.spongepowered.api.entity.EntityTypes;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.block.ChangeBlockEvent;
 import org.spongepowered.api.event.cause.entity.damage.source.EntityDamageSource;
 import org.spongepowered.api.event.entity.DestructEntityEvent;
+import org.spongepowered.api.event.entity.SpawnEntityEvent;
 import org.spongepowered.api.event.filter.cause.First;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GameStartingServerEvent;
@@ -32,6 +34,7 @@ import org.spongepowered.api.text.action.TextActions;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.text.format.TextFormat;
 import org.spongepowered.api.text.format.TextStyles;
+import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
 import java.io.DataInputStream;
@@ -41,6 +44,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Optional;
+import java.util.Random;
 import java.util.logging.Logger;
 
 @Plugin(id="HellOnSpongee", name="Hell On Spongee", version="0.0.1-SNAPSHOT", dependencies="required-after:EconomyLite")
@@ -76,6 +80,488 @@ public class MainClass
   }
   
   @Listener
+  public void onSpawnEntity(SpawnEntityEvent event) {
+      for (EntitySnapshot entitySnapshot : event.getEntitySnapshots()) {
+          if (entitySnapshot.getType().equals(EntityTypes.BLAZE)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Blaze", "Blaze#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Blaze", "Blaze%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.BLAZE, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.CAVE_SPIDER)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "CaveSpider", "CaveSpider#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "CaveSpider", "CaveSpider%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.CAVE_SPIDER, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.CHICKEN)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();                  
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Chicken", "Chicken#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <=(ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Chicken", "Chicken%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.CHICKEN, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.COW)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();            
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Cow", "Cow#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Cow", "Cow%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.COW, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.CREEPER)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Creeper", "Creeper#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Creeper", "Creeper%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.CREEPER, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.ENDER_DRAGON)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "EnderDragon", "EnderDragon#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "EnderDragon", "EnderDragon%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.ENDER_DRAGON, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.ENDERMAN)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Enderman", "Enderman#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Enderman", "Enderman%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.ENDERMAN, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.GHAST)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Ghast", "Ghast#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Ghast", "Ghast%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.GHAST, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.GIANT)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Giant", "Giant#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Giant", "Giant%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.GIANT, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.GUARDIAN)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Guardian", "Guardian#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Guardian", "Guardian%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.GUARDIAN, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.HORSE)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Horse", "Horse#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Horse", "Horse%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.HORSE, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.IRON_GOLEM)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "IronGolemn", "IronGolemn#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "IronGolemn", "IronGolemn%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.IRON_GOLEM, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.MAGMA_CUBE)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "MagmaCube", "MagmaCube#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "MagmaCube", "MagmaCube%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.MAGMA_CUBE, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.MUSHROOM_COW)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "MushroomCow", "MushroomCow#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "MushroomCow", "MushroomCow%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.MUSHROOM_COW, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.OCELOT)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Ocelot", "Ocelot#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Ocelot", "Ocelot%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.OCELOT, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.PIG)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Pig", "Pig#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Pig", "Pig%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.PIG, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.PIG_ZOMBIE)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "PigZombie", "PigZombie#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "PigZombie", "PigZombie%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.PIG_ZOMBIE, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.RABBIT)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Rabbit", "Rabbit#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Rabbit", "Rabbit%").getInt())){                 
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.RABBIT, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.SHEEP)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Sheep", "Sheep#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Sheep", "Sheep%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.SHEEP, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.SKELETON)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Skeleton", "Skeleton#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Skeleton", "Skeleton%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.SKELETON, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.SLIME)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Slime", "Slime#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Slime", "Slime%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.SLIME, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.SNOWMAN)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Snowman", "Snowman#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Snowman", "Snowman%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.SNOWMAN, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.SPIDER)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Spider", "Spider#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Spider", "Spider%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.SPIDER, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.SQUID)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Squid", "Squid#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Squid", "Squid%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.SQUID, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.WITCH)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Witch", "Withc#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Witch", "Witch%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.WITCH, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.WITHER)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Wither", "Wither#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Witehr", "Wither%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.WITHER, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.WOLF)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Wolf", "Wolf#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Wolf", "Wolf%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.WOLF, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+          if (entitySnapshot.getType().equals(EntityTypes.ZOMBIE)) {
+              Optional<Location<World>> location = entitySnapshot.getLocation();
+              if (location.isPresent()) {
+                  World world = location.get().getExtent();
+                  for (int i = 0; i < (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Zombie", "Zombie#").getInt()); i++) { // Do this 5 times
+                      Random roll = new Random();
+                      int answer = roll.nextInt(100)+1;
+                      if (answer <= (ConfigurationManager.getInstance().getConfig().getNode("Spawning!", "Zombie", "Zombie%").getInt())){
+                          Optional<Entity> newCreeper = world.createEntity(EntityTypes.ZOMBIE, location.get().getPosition());
+                          if (newCreeper.isPresent()) {
+                              event.getEntities().add(newCreeper.get());
+                          }
+                      }
+                  }
+              }
+
+          }
+      }
+  }  
+
+@Listener
   public void enable(GameStartingServerEvent event)
   {
     ConfigurationManager.getInstance().setup(this.configFile, this.configManager);
@@ -327,8 +813,7 @@ public static PortalManager loadPortal() {
         this.economy.getPlayerAPI().addCurrency(player2, ConfigurationManager.getInstance().getConfig().getNode(new Object[] { "Pay_4_Kills", "Zombie" }).getInt());
       }
     }
-  }
-  
+  }  
   @Listener
   public void Destroy(ChangeBlockEvent.Break event)
   {
@@ -373,36 +858,51 @@ public static PortalManager loadPortal() {
       }
       if (block.getType().equals(BlockTypes.IRON_ORE))
       {
-        if (!event.getCause().first(Player.class).isPresent()) {
-          return;
-        }
-        Player player = (Player)event.getCause().first(Player.class).get();
-        Optional<World> worldOpt = Sponge.getGame().getServer().getWorld("world");
-        if (worldOpt.isPresent()) {
-          Sponge.getGame().getServer().getBroadcastSink().sendMessage(Texts.of(new Object[] { TextColors.GOLD, player + "has dug up some iron" }));
-        }
-      }
+          if (!event.getCause().first(Player.class).isPresent()) {
+              return;
+            }
+            if (ConfigurationManager.getInstance().getConfig().getNode("Portals", "IronLocation").equals("true")){
+                Player player = (Player)event.getCause().first(Player.class).get();
+                String player2 = player.getName().toString();
+                Sponge.getCommandDispatcher().process(player, "oppd Iron");
+                Sponge.getCommandDispatcher().process(player, "opps Iron");
+                Sponge.getGame().getServer().getBroadcastSink().sendMessage(Texts.of(new Object[] { new TextFormat(TextStyles.UNDERLINE, TextColors.AQUA), TextActions.runCommand("/opp Iron"), player2 + "has found some Iron" }));
+            } else
+                if (!ConfigurationManager.getInstance().getConfig().getNode("Portals", "IronLocation").equals("true")){
+                    return;
+                }
+          }
       if (block.getType().equals(BlockTypes.GOLD_ORE))
       {
         if (!event.getCause().first(Player.class).isPresent()) {
-          return;
+            return;
+          }
+          if (ConfigurationManager.getInstance().getConfig().getNode("Portals", "GoldLocation").equals("true")){
+              Player player = (Player)event.getCause().first(Player.class).get();
+              String player2 = player.getName().toString();
+              Sponge.getCommandDispatcher().process(player, "oppd Gold");
+              Sponge.getCommandDispatcher().process(player, "opps Gold");
+              Sponge.getGame().getServer().getBroadcastSink().sendMessage(Texts.of(new Object[] { new TextFormat(TextStyles.UNDERLINE, TextColors.AQUA), TextActions.runCommand("/opp Gold"), player2 + "has struck some Gold" }));
+          } else
+              if (!ConfigurationManager.getInstance().getConfig().getNode("Portals", "GoldLocation").equals("true")){
+                  return;
+              }
         }
-        Player player = (Player)event.getCause().first(Player.class).get();
-        Optional<World> worldOpt = Sponge.getGame().getServer().getWorld("world");
-        if (worldOpt.isPresent()) {
-          Sponge.getGame().getServer().getBroadcastSink().sendMessage(Texts.of(new Object[] { TextColors.GOLD, player + "has dug up some gold" }));
-        }
-      }
       if (block.getType().equals(BlockTypes.DIAMOND_ORE))
       {
         if (!event.getCause().first(Player.class).isPresent()) {
           return;
         }
-        Player player = (Player)event.getCause().first(Player.class).get();
-        String player2 = player.getName().toString();
-        Sponge.getCommandDispatcher().process(player, "oppd Diamond");
-        Sponge.getCommandDispatcher().process(player, "opps Diamond");
-        Sponge.getGame().getServer().getBroadcastSink().sendMessage(Texts.of(new Object[] { new TextFormat(TextStyles.UNDERLINE, TextColors.AQUA), TextActions.runCommand("/opp Diamond"), player2 + "has dug up a Diamond" }));
+        if (ConfigurationManager.getInstance().getConfig().getNode("Portals", "DiamondLocation").equals("true")){
+            Player player = (Player)event.getCause().first(Player.class).get();
+            String player2 = player.getName().toString();
+            Sponge.getCommandDispatcher().process(player, "oppd Diamond");
+            Sponge.getCommandDispatcher().process(player, "opps Diamond");
+            Sponge.getGame().getServer().getBroadcastSink().sendMessage(Texts.of(new Object[] { new TextFormat(TextStyles.UNDERLINE, TextColors.AQUA), TextActions.runCommand("/opp Diamond"), player2 + "has dug up a Diamond" }));
+        } else
+            if (!ConfigurationManager.getInstance().getConfig().getNode("Portals", "DiamondLocation").equals("true")){
+                return;
+            }
       }
     }
   }

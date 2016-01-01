@@ -31,28 +31,28 @@ public class RemovePortal implements CommandCallable {
         return CommandResult.success();
     }
 
-    @Override
+    
     public List<String> getSuggestions(CommandSource commandSource, String s) throws CommandException {
         return null;
     }
 
-    @Override
+    
     public boolean testPermission(CommandSource commandSource) {
         return false;
     }
 
-    @Override
+    
     public Optional<Text> getShortDescription(CommandSource commandSource) {
         Text message = Texts.of("Removes warp. Admin command");
         return Optional.of(message);
     }
 
-    @Override
+    
     public Optional<Text> getHelp(CommandSource commandSource) {
         return null;
     }
 
-    @Override
+    
     public Text getUsage(CommandSource commandSource) {
         Text message = Texts.of("/removewarp [name]");
         return message;
